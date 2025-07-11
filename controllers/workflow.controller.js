@@ -21,7 +21,7 @@ export const sendReminders = serve(async (context) => {
     }
 
     for(const daysBefore of REMINDERS) {
-        const reminderDate = renewalDate.substract(daysBefore, 'day')
+        const reminderDate = renewalDate.subtract(daysBefore, 'day')
 
         if(reminderDate.isAfter(dayjs())) {
             await sleepUtilReminder(context, `Reminder ${daysBefore} days before`, reminderDate)
@@ -39,7 +39,7 @@ const fetchSubscription = async (context, subscriptionId) => {
 
 const sleepUtilReminder = async (context, label, date) => {
     console.log(`Sleeping until ${label} reminder at ${date}`)
-    await context.sleepUtil(label, date.toDate())
+    await context.sleepUntil(label, date.toDate())
 }
 
 const triggerReminder = async (context, label) => {
